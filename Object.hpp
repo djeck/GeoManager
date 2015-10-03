@@ -12,7 +12,7 @@
 #define PERSO_SIZE 6
 #define PERSO_N_PARAM 3
 
-class Personne : public Drawable , public Physical
+class Object : public Drawable , public Physical
 {
 private:
 
@@ -26,8 +26,8 @@ private:
   bool m_selected;
   void transformShape();
 public:
-  Personne();
-  ~Personne();
+  Object();
+  ~Object();
   void draw();
   
   void setRotation(sf::Vector3f rotation);

@@ -1,6 +1,6 @@
-#include "personne.hpp"
+#include "Object.hpp"
 
-Personne::Personne()
+Object::Object()
 {
   m_index = glGenLists(1);
   
@@ -17,12 +17,12 @@ Personne::Personne()
   transformShape();
 }
 
-Personne::~Personne()
+Object::~Object()
 {
   glDeleteLists(m_index, 1);
 }
 
-void Personne::transformShape()
+void Object::transformShape()
 {
     glNewList(m_index, GL_COMPILE);
     
@@ -70,9 +70,9 @@ void Personne::transformShape()
 }
 
 
-void Personne::draw()
+void Object::draw()
 {
-  glPushMatrix();
+	glPushMatrix();
   
     glRotated((double)m_rotate.x,1,0,0);
     glRotated((double)m_rotate.y,0,1,0);
@@ -87,28 +87,28 @@ void Personne::draw()
 }
 
 
-void Personne::setRotation(sf::Vector3f rotation)
+void Object::setRotation(sf::Vector3f rotation)
 {
   m_rotate=rotation;
 }
 
-void Personne::setRotationMV(sf::Vector3f rotation)
+void Object::setRotationMV(sf::Vector3f rotation)
 {
   m_drotate=rotation;
 }
 
-void Personne::setRotationMVAcc(sf::Vector3f rotation)
+void Object::setRotationMVAcc(sf::Vector3f rotation)
 {
   m_ddrotate=rotation;
 }
 
 
-sf::Vector3f Personne::getRotation()
+sf::Vector3f Object::getRotation()
 {
   return m_rotate;
 }
 
-void Personne::calcul()
+void Object::calcul()
 {
   m_elapsed = m_clock.restart();
   
@@ -118,11 +118,11 @@ void Personne::calcul()
   m_drotate += m_ddrotate*m_elapsed.asSeconds();
   m_rotate += m_drotate*m_elapsed.asSeconds();
 }
-void Personne::setSelected(bool select)
+void Object::setSelected(bool select)
 {
   m_selected=select;
 }
-bool Personne::isSelected()
+bool Object::isSelected()
 {
   return m_selected;
 }
