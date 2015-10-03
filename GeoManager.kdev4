@@ -1,3 +1,4 @@
 [Project]
-Manager=KDevGenericManager
 Name=GeoManager
+Manager=KDevCMakeManager
+VersionControl=
