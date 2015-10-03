@@ -16,6 +16,23 @@ Object::Object()
   
   transformShape();
 }
+Object::Object(sf::Vector3f pos)
+{
+  m_index = glGenLists(1);
+  
+  m_position=pos;
+  m_rotate.x=0;
+  m_rotate.x=0;
+  m_rotate.x=0;
+  m_drotate.x=0;
+  m_drotate.x=0;
+  m_drotate.x=0;
+  m_ddrotate.x=0;
+  m_ddrotate.x=0;
+  m_ddrotate.x=0;
+  
+  transformShape();
+}
 
 Object::~Object()
 {

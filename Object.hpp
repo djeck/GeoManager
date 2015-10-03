@@ -1,10 +1,8 @@
-#ifndef PERSONNE_HPP
-#define PERSONNE_HPP
+#ifndef OBJECT_HPP
+#define OBJECT_HPP
 
 #include <iostream>
-#include <SFML/Graphics.hpp>
 #include <SFML/OpenGL.hpp>
-#include <SFML/System/Vector3.hpp>
 #include "Physical.hpp"
 #include "Drawable.hpp"
 
@@ -27,6 +25,7 @@ private:
   void transformShape();
 public:
   Object();
+  Object(sf::Vector3f pos);
   ~Object();
   void draw();
   

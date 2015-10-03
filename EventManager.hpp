@@ -2,18 +2,23 @@
 #define EVENT_MANAGER
 
 #include <SFML/Graphics.hpp>
-#include "Object.hpp"
+#include "MapManager.hpp"
+
+class Window;
 
 class EventManager
 {
 public:
 	EventManager();
-	void setCloseCallback(sf::RenderWindow* window);
+	void setCallback(Window* window);
 	void run(sf::Event event);
 private:
+	void mouseMove(int x,int y);
 	void build();
 	void close();
-	sf::RenderWindow* m_ptrWindow;
-	
+	Window* m_ptrWindow;
+	MapManager* m_ptrMap;
 };
+
+
 #endif

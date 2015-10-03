@@ -6,18 +6,18 @@ View::View()
   varInit();
 }
 
+View::View(sf::Vector3f position)
+{
+  m_position=position;
+  varInit();
+}
+
 void View::varInit()
 {
   gluPerspective(70,(double)640/480,1,1000);
   m_targetPosition.x=0;
   m_targetPosition.y=0;
   m_targetPosition.z=0;
-}
-
-View::View(sf::Vector3f position)
-{
-  m_position=position;
-  varInit();
 }
 
 void View::init()
@@ -53,4 +53,5 @@ void View::setVitesseFlying(sf::Vector3f vitesse)
   m_dposition=vitesse;
   m_dtargetPosition=vitesse;
 }
+
 

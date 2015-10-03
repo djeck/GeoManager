@@ -1,9 +1,12 @@
 #ifndef MAP_MANAGER
 #define MAP_MANAGER
 
-#include <SFML/Graphics.hpp>
+#include <stdio.h>
+#include <string.h>
 #include "Object.hpp"
 #include "view.hpp"
+
+typedef std::vector<Object*> Map;
 
 class MapManager
 {
@@ -13,9 +16,13 @@ public:
 	void Print();
 	void Calcul();
 	void addObject(Object* arg0);
+	Map* getPtrMap();
+	View* getCamera();
+	
 private:
 	void build();
-	std::vector<Object*> m_vector;
-	View m_camera;
+	Map m_vector;
+	View *m_camera;
+	void loadFromFile(std::string path);
 };
 #endif

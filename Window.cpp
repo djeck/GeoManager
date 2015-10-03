@@ -17,11 +17,11 @@ void Window::build()
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity( );
     
+    m_map=new MapManager(); // always before
+	
+	
     m_listener = new EventManager();
-    m_listener->setCloseCallback(this);
-    m_map=new MapManager();
-    
-    m_map->addObject(new Object());// test
+    m_listener->setCallback(this);
 
 }
 
@@ -49,3 +49,10 @@ void Window::start()
     }
 }
 
+MapManager* Window::getMap()
+{
+	if(m_map!=0)
+		return m_map;
+	std::cout<<"Erreur acces impossible au gestionnaire de map initilisez le avant"<<std::endl;
+	return 0;
+}
