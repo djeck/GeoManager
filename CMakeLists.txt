@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.6)
 project(geomanager)
 
-add_executable(geomanager main.cpp Drawable.cpp personne.cpp view.cpp Physical.cpp EventManager.cpp MapManager.cpp)
+add_executable(geomanager main.cpp Drawable.cpp Object.cpp view.cpp Physical.cpp EventManager.cpp MapManager.cpp Window.cpp)
 
 find_package(OpenGL REQUIRED)
 
