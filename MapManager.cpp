@@ -8,9 +8,14 @@ MapManager::MapManager()
 
 MapManager::~MapManager()
 {
-	for(std::vector<Object*>::iterator it= m_vector.begin();it!=m_vector.end();it++)
+	for(Map::iterator it= m_vector.begin();it!=m_vector.end();it++)
 	{
 		delete(*it);
+	}
+	
+	for(int i = 0;i<m_mesh.size();i++)
+	{
+		delete(m_mesh.at(i));
 	}
 	
 	delete m_camera;
@@ -19,6 +24,9 @@ MapManager::~MapManager()
 void MapManager::build()
 {
     loadFromFile("../map.txt");
+    
+    //test
+    m_mesh[0]=new Mesh();
 }
 
 void MapManager::addObject(Object* arg0)
@@ -38,7 +46,11 @@ void MapManager::Print()
 	
 	for(std::vector<Object*>::iterator it= m_vector.begin();it!=m_vector.end();it++)
 	{
-		(*it)->draw();
+		Object* objet=*it;
+		if(m_mesh.find(objet->getId())!=m_mesh.end())
+			m_mesh[objet->getId()]->draw(objet->getPosition(),objet->getRotation());
+		else
+			std::cout<<"impossible de trouver le mesh pour l'objet "<<objet->getId()<<std::endl;
 	}
 	
 }
@@ -78,8 +90,11 @@ void MapManager::loadFromFile(std::string path)
 		if ( strcmp( lineHeader, "o" ) == 0 ) // object
 		{
 			sf::Vector3f position;
-			fscanf(file, "%f %f %f\n", &position.x, &position.y, &position.z );
-			addObject(new Object(position));
+			int kind;
+			fscanf(file, "%d %f %f %f\n", &kind, &position.x, &position.y, &position.z );
+			Object *obj = new Object(position);
+			obj->setId(kind);
+			addObject(obj);
 			std::cout<<"added object in "<<position.x<<" - "<<position.y<<" - "<<position.z<<std::endl;
 		}
 		else if ( strcmp( lineHeader, "c" ) == 0 )
@@ -87,6 +102,7 @@ void MapManager::loadFromFile(std::string path)
 			sf::Vector3f position;
 			fscanf(file, "%f %f %f\n", &position.x, &position.y, &position.z );
 			m_camera->setPosition(position);
+			std::cout<<"set camera in "<<position.x<<" - "<<position.y<<" - "<<position.z<<std::endl;
 		}
 		
 	}// end of loop
@@ -97,5 +113,15 @@ View* MapManager::getCamera()
 	return m_camera;
 }
 
+void MapManager::addMesh(int id,Mesh* arg0)
+{
+	if(m_mesh.find(id)==m_mesh.end())
+		m_mesh[id]=arg0;
+}
 
+
+drawable* MapManager::getPtrMesh()
+{
+	return &m_mesh;
+}
 

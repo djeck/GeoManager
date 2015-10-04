@@ -8,8 +8,6 @@ class Drawable
 protected:
 public:
   Drawable();
-  virtual void setSelected(bool select);
-  virtual bool isSelected();
   virtual void draw();
 };
 
